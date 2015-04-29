@@ -7,6 +7,7 @@
 in `sm-rbtcloud`:
 
 `$ git submodule init`
+
 `$ git submodule updat`
 
 ### Preparation
