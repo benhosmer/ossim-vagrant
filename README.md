@@ -12,6 +12,10 @@ in `sm-rbtcloud`:
 1. You'll need [Virtualbox](http://virtualbox.org)
 2. You'll also need [Vagrant](http://vagrantup.com)
 
+Optionally, you might find the Vagrant vb-guest plugin helpful. You can add
+it with `$ vagrant plugin install vagrant-vbguest`. This keeps your guest
+additions updated in the vagrant box when you start it.
+
 After installing both of these, you're ready to start!
 
 ### Starting the box
@@ -19,6 +23,8 @@ After installing both of these, you're ready to start!
 1. In this directory, use `$ vagrant up` to start the machine.
 
 This directory locally is shared with the vagrant machine at `/vagrant`
+
+You can now log in to you running instance with `$ vagrant ssh`
 
 ### Stopping the box (Equivalent to power off)
 1. Use `$ vagrant halt`
