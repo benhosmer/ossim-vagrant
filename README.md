@@ -1,6 +1,13 @@
-# OSSIM
+# OSSIM OMAR PostgreSQL Single Node Development
 
 ## Getting Started
+
+### Initialize the git submodules
+1. After cloning this repo, you'll need to update the submodules contained
+in `sm-rbtcloud`:
+
+`$ git submodule init`
+`$ git submodule updat`
 
 ### Preparation
 1. You'll need [Virtualbox](http://virtualbox.org)
