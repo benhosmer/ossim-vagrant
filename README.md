@@ -5,10 +5,8 @@
 ### Initialize the git submodules
 1. After cloning this repo, you'll need to update the submodules contained
 in `sm-rbtcloud`:
-
-`$ git submodule init`
-
-`$ git submodule updat`
+    - `$ git submodule init`
+    - `$ git submodule update`
 
 ### Preparation
 1. You'll need [Virtualbox](http://virtualbox.org)
