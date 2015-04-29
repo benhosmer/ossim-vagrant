@@ -1,0 +1,3 @@
+[submodule "sm-rbtcloud-com"]
+	path = sm-rbtcloud-com
+	url = git@github.com:radiantbluetechnologies/sm-rbtcloud-com.git

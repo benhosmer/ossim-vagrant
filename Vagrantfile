@@ -41,6 +41,8 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   #config.vm.synced_folder "data", "/vagrant_data"
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
+  config.vm.synced_folder "sm-rbtcloud-com/salt/", "/srv/salt", type: "nfs"
+  config.vm.synced_folder "sm-rbtcloud-com/pillar/", "/srv/pillar", type: "nfs"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -56,6 +58,10 @@ Vagrant.configure(2) do |config|
   #
   # View the documentation for the provider you are using for more
   # information on available options.
+  config.vm.provision :salt do |salt|
+    salt.minion_config = "minion"
+    salt.run_highstate = false
+  end
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
   # such as FTP and Heroku are also available. See the documentation at
@@ -68,5 +74,5 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   # config.vm.provision "shell", inline <<-SHELL
-  config.vm.provision "shell", path: "bootstrap.sh"
+  config.vm.provision "shell", path: "postup.sh"
 end
