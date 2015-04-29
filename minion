@@ -1,0 +1,5 @@
+# Masterless Minion Config File
+
+file_client: local
+id: rbtcloud.dev
+
