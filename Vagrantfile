@@ -43,7 +43,7 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.synced_folder "sm-rbtcloud-com/salt/", "/srv/salt", type: "nfs"
   config.vm.synced_folder "sm-rbtcloud-com/pillar/", "/srv/pillar", type: "nfs"
-
+  config.vm.synced_folder "sm-rbtcloud-com/formulas/", "/srv/formulas", type: "nfs"
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
