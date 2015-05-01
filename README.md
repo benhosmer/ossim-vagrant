@@ -6,9 +6,8 @@ development chain _could_ be installed in the future)
 
 ### Initialize the git submodules
 1. After cloning this repo, you'll need to update the submodules contained
-in `sm-rbtcloud-com`:
-    - `$ git submodule init`
-    - `$ git submodule update`
+in `sm-rbtcloud-com`.  From the top-level:
+    - `$ git submodule update --init --recursive`
 
 ### Preparation
 1. You'll need [Virtualbox](http://virtualbox.org)
@@ -22,7 +21,7 @@ After installing both of these, you're ready to start!
 
 But wait, there's more!
 
-Add `192.168.33.55 omar-single.rbtcloud.dev` to your /etc/hosts file if 
+Add `192.168.33.55 omar-single.rbtcloud.dev` to your /etc/hosts file if
 you plan on accessing the deployed OMAR.  It is proxied to:
 
 [http://omar-single.rbtcloud.dev/omar](http://omar-single.rbtcloud.dev/omar)
@@ -40,7 +39,7 @@ You can now log in to you running instance with `$ vagrant ssh`
 
 #### Destroy the box
 1. Use `$ vagrant destroy`
-    - This wipes the box clean of everything may have done and resets it again. Don't 
+    - This wipes the box clean of everything may have done and resets it again. Don't
       worry about your code being deleted though. Since it is in the `/vagrant` directory
       it is shared with your local machine.
 
