@@ -14,7 +14,7 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "bhosmer/centos6.6-minimal"
   #config.vm.provision :shell, path: "../bootstrap.sh"
-  config.vm.hostname = "ossim.dev"
+  config.vm.hostname = "single-omar.rbtcloud.dev"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -53,14 +53,14 @@ Vagrant.configure(2) do |config|
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-     vb.memory = "4096"
+     vb.memory = "2048"
   end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
   config.vm.provision :salt do |salt|
     salt.minion_config = "minion"
-    salt.run_highstate = false
+    salt.run_highstate = true
   end
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
