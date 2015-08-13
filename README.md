@@ -44,7 +44,8 @@ You can now log in to you running instance with `$ vagrant ssh`
       it is shared with your local machine.
 
 ### Notes
-Even though you have access to the hostname - SSH through it won't work
-unless you create a new user access, and define a password.  The default
-'vagrant' user is access via a ssh-key - handled by the `vagrant ssh`
-command.
+You can ssh to the box itself using the standard `$ vagrant ssh` command which uses Vagrant's public/private key.
+
+If you'd like to access the box through the hostname, the default vagrant password, which is `vagrant` will work too:
+
+`$ ssh vagrant@omar-single.rbtcloud.dev` or using the ip `$ ssh vagrant@192.168.33.55` if you didn't modify your `/etc/hosts`
