@@ -49,3 +49,18 @@ You can ssh to the box itself using the standard `$ vagrant ssh` command which u
 If you'd like to access the box through the hostname, the default vagrant password, which is `vagrant` will work too:
 
 `$ ssh vagrant@omar-single.rbtcloud.dev` or using the ip `$ ssh vagrant@192.168.33.55` if you didn't modify your `/etc/hosts`
+
+### OSSIM Only Without Access to sm-rbtcloud
+The `sm-rbtcloud` repo contains proprietary company specific credentials and
+houses our internal [SALT](http://saltstack.com) states for configuration of
+a variety of software development projects.
+
+If you're simply looking for a Vagrant-based OSSIM box, you can do the following
+and be up and running quickly:
+
+1. Ignore the submodule instructions from above. You don't need those to install
+OSSIM.
+2. Move the existing `Vagrantfile` in the repo to something else, ie `_Vagrantfile`.
+3. Rename the `ossim-only-Vagrantfile` to `Vagrantfile`. 
+4. `$ vagrant up` will install the dependencies you need as well as OSSIM itself.
+
