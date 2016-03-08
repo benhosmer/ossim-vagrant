@@ -63,7 +63,7 @@ Vagrant.configure(2) do |config|
     pgsqlsingle.vm.box = "bhosmer/centos6.6-minimal"
     pgsqlsingle.vm.hostname = "pgsql-single.rbtcloud.dev"
     pgsqlsingle.vm.network "private_network", ip: "192.168.33.60"
-    pgsqlsingle.vm.provision: :salt do |salt|
+    pgsqlsingle.vm.provision :salt do |salt|
       salt.minion_config = "pgsql-single.minion"
       salt.run_highstate = true
       salt.log_level = "all"
