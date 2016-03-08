@@ -1,6 +1,4 @@
-# OSSIM OMAR PostgreSQL Single Node Development
-(Currently, this is just the runtime/binary pieces.  The full
-development chain _could_ be installed in the future)
+# OC2S Vagrant Development
 
 ## Getting Started
 
