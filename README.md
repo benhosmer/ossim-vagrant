@@ -26,11 +26,18 @@ you plan on accessing the deployed OMAR.  It is proxied to:
 
 [http://omar-single.rbtcloud.dev/omar](http://omar-single.rbtcloud.dev/omar)
 
-### Starting the box
+Add `192.168.33.56` to your `/etc/hosts` file for the ELK machine.
 
-1. In this directory, use `$ vagrant up` to start the machine.
+This proxies to [http://elk.rbtcloud.dev](http://elk.rbtcloud.dev)
 
-This directory locally is shared with the vagrant machine at `/vagrant`
+### Starting the box(es)
+This Vagrant setup uses [Vagrant Multi-Machine](https://www.vagrantup.com/docs/multi-machine/)
+
+1. In this directory, use `$ vagrant up` to start the default omar-single node machine. 
+2. In this directory, use `$ vagrant up elk` to start the ELK machine.
+
+This directory locally is shared with the vagrant machine at `/vagrant` and configured
+for NFS with the SALT Provisioner.
 
 You can now log in to you running instance with `$ vagrant ssh`
 
