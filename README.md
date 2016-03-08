@@ -67,7 +67,5 @@ and be up and running quickly:
 
 1. Ignore the submodule instructions from above. You don't need those to install
 OSSIM.
-2. Move the existing `Vagrantfile` in the repo to something else, ie `_Vagrantfile`.
-3. Rename the `ossim-only-Vagrantfile` to `Vagrantfile`. 
-4. `$ vagrant up` will install the dependencies you need as well as OSSIM itself.
+2. `$ vagrant up ossim` will install the dependencies you need as well as OSSIM itself.
 
