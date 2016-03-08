@@ -2,6 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
+
+
   # An OMAR/PostgreSQL Single Machine
   config.vm.define "omarsingle", primary: true do |omarsingle|
     omarsingle.vm.box = "bhosmer/centos6.6-minimal" 
@@ -28,6 +30,12 @@ Vagrant.configure(2) do |config|
     end
   end
 
+  # A clean slate CentOS 6 Machine for experimenting and testing
+  config.vm.define "base", autostart: false do |base|
+    base.vm.box = "bhosmer/centos6.6-minimal" 
+    base.vm.hostname = "base.rbtcloud.dev"
+    base.vm.network "private_network", ip: "192.168.33.57"
+  end
 
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.synced_folder "sm-rbtcloud-com/salt/", "/srv/salt", type: "nfs"
@@ -38,3 +46,4 @@ Vagrant.configure(2) do |config|
      vb.memory = "2048"
   end
 end
+
