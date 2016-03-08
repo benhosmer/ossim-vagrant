@@ -44,7 +44,20 @@ Vagrant.configure(2) do |config|
     ossim.vm.network "private_network", ip: "192.168.33.58"
     ossim.provision "shell", path: "ossim-postup.sh"
   end
-
+ 
+  # A single node geowave machine 
+  config.vm.define "geowave-single", autostart: false do |geowavesingle|
+    geowave-single.vm.box = "bhosmer/centos6.6-minimal" 
+    geowave-single.vm.hostname = "geowave-single.rbtcloud.dev"
+    geowave-single.vm.network "private_network", ip: "192.168.33.59"
+    geowave-single.vm.provision :salt do |salt|
+      salt.minion_config = "geowave-single.minion"
+      salt.run_highstate = false
+      #salt.run_highstate = true
+      salt.log_level = "all"
+    end
+  end
+ 
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.synced_folder "sm-rbtcloud-com/salt/", "/srv/salt", type: "nfs"
   config.vm.synced_folder "sm-rbtcloud-com/pillar/", "/srv/pillar", type: "nfs"
