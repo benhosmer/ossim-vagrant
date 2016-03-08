@@ -36,6 +36,14 @@ Vagrant.configure(2) do |config|
     base.vm.hostname = "base.rbtcloud.dev"
     base.vm.network "private_network", ip: "192.168.33.57"
   end
+  
+  # A clean slate CentOS 6 Machine for experimenting and testing
+  config.vm.define "ossim", autostart: false do |ossim|
+    ossim.vm.box = "bhosmer/centos6.6-minimal" 
+    ossim.vm.hostname = "ossim-single.rbtcloud.dev"
+    ossim.vm.network "private_network", ip: "192.168.33.58"
+    ossim.provision "shell", path: "ossim-postup.sh"
+  end
 
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.synced_folder "sm-rbtcloud-com/salt/", "/srv/salt", type: "nfs"
