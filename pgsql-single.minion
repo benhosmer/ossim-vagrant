@@ -1,0 +1,10 @@
+# Masterless Minion Config File
+
+file_client: local
+id: pgsql-single.rbtcloud.dev
+
+#postgres.host: 'localhost'
+#postgres.port: '5432'
+#postgres.user: 'postgres' -> db user
+#postgres.pass: ''
+#postgres.maintenance_db: 'postgres'

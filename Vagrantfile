@@ -46,14 +46,26 @@ Vagrant.configure(2) do |config|
   end
  
   # A single node geowave machine 
-  config.vm.define "geowave-single", autostart: false do |geowavesingle|
-    geowave-single.vm.box = "bhosmer/centos6.6-minimal" 
-    geowave-single.vm.hostname = "geowave-single.rbtcloud.dev"
-    geowave-single.vm.network "private_network", ip: "192.168.33.59"
-    geowave-single.vm.provision :salt do |salt|
+  config.vm.define "geowavesingle", autostart: false do |geowavesingle|
+    geowavesingle.vm.box = "bhosmer/centos6.6-minimal" 
+    geowavesingle.vm.hostname = "geowave-single.rbtcloud.dev"
+    geowavesingle.vm.network "private_network", ip: "192.168.33.59"
+    geowavesingle.vm.provision :salt do |salt|
       salt.minion_config = "geowave-single.minion"
       salt.run_highstate = false
       #salt.run_highstate = true
+      salt.log_level = "all"
+    end
+  end
+
+  # A single PostgreSQL machine
+  config.vm.define "pgsqlsingle", autostart: false do |pgsqlsingle|
+    pgsqlsingle.vm.box = "bhosmer/centos6.6-minimal"
+    pgsqlsingle.vm.hostname = "pgsql-single.rbtcloud.dev"
+    pgsqlsingle.vm.network "private_network", ip: "192.168.33.60"
+    pgsqlsingle.vm.provision: :salt do |salt|
+      salt.minion_config = "pgsql-single.minion"
+      salt.run_highstate = true
       salt.log_level = "all"
     end
   end
