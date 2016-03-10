@@ -1,79 +1,82 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
 Vagrant.configure(2) do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "bhosmer/centos6.6-minimal"
-  #config.vm.provision :shell, path: "../bootstrap.sh"
-  config.vm.hostname = "omar-single.rbtcloud.dev"
 
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
+  # An OMAR/PostgreSQL Single Machine
+  config.vm.define "omarsingle", primary: true do |omarsingle|
+    omarsingle.vm.box = "bhosmer/centos6.6-minimal" 
+    omarsingle.vm.hostname = "omar-single.rbtcloud.dev"
+    omarsingle.vm.network "private_network", ip: "192.168.33.55"
+    omarsingle.vm.provision :salt do |salt|
+      salt.minion_config = "omar-single.minion"
+      salt.run_highstate = false
+      #salt.run_highstate = true
+      salt.log_level = "all"
+    end
+  end
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 8080, host: 8080
+  # An Elastic Search, Logstash, Kibana Single Node Machine
+  config.vm.define "elk", autostart: false do |elk|
+    elk.vm.box = "bhosmer/centos6.6-minimal" 
+    elk.vm.hostname = "elk.rbtcloud.dev"
+    elk.vm.network "private_network", ip: "192.168.33.56"
+    elk.vm.provision :salt do |salt|
+      salt.minion_config = "elk.minion"
+      salt.run_highstate = false
+      #salt.run_highstate = true
+      salt.log_level = "all"
+    end
+  end
 
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.55"
+  # A clean slate CentOS 6 Machine for experimenting and testing
+  config.vm.define "base", autostart: false do |base|
+    base.vm.box = "bhosmer/centos6.6-minimal" 
+    base.vm.hostname = "base.rbtcloud.dev"
+    base.vm.network "private_network", ip: "192.168.33.57"
+  end
+  
+  # A clean slate CentOS 6 Machine for experimenting and testing
+  config.vm.define "ossim", autostart: false do |ossim|
+    ossim.vm.box = "bhosmer/centos6.6-minimal" 
+    ossim.vm.hostname = "ossim-single.rbtcloud.dev"
+    ossim.vm.network "private_network", ip: "192.168.33.58"
+    ossim.provision "shell", path: "ossim-postup.sh"
+  end
+ 
+  # A single node geowave machine 
+  config.vm.define "geowavesingle", autostart: false do |geowavesingle|
+    geowavesingle.vm.box = "bhosmer/centos6.6-minimal" 
+    geowavesingle.vm.hostname = "geowave-single.rbtcloud.dev"
+    geowavesingle.vm.network "private_network", ip: "192.168.33.59"
+    geowavesingle.vm.provision :salt do |salt|
+      salt.minion_config = "geowave-single.minion"
+      salt.run_highstate = false
+      #salt.run_highstate = true
+      salt.log_level = "all"
+    end
+  end
 
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network"
-
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-  #config.vm.synced_folder "data", "/vagrant_data"
+  # A single PostgreSQL machine
+  config.vm.define "pgsqlsingle", autostart: false do |pgsqlsingle|
+    pgsqlsingle.vm.box = "bhosmer/centos6.6-minimal"
+    pgsqlsingle.vm.hostname = "pgsql-single.rbtcloud.dev"
+    pgsqlsingle.vm.network "private_network", ip: "192.168.33.60"
+    pgsqlsingle.vm.provision :salt do |salt|
+      salt.minion_config = "pgsql-single.minion"
+      salt.run_highstate = true
+      salt.log_level = "all"
+    end
+  end
+ 
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.synced_folder "sm-rbtcloud-com/salt/", "/srv/salt", type: "nfs"
   config.vm.synced_folder "sm-rbtcloud-com/pillar/", "/srv/pillar", type: "nfs"
   config.vm.synced_folder "sm-rbtcloud-com/formulas/", "/srv/formulas", type: "nfs"
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
+  config.vm.synced_folder "sm-rbtcloud-com/reactor/", "/srv/reactor", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
      vb.memory = "2048"
   end
-  #
-  # View the documentation for the provider you are using for more
-  # information on available options.
-  config.vm.provision :salt do |salt|
-    salt.minion_config = "minion"
-    salt.run_highstate = true
-    salt.log_level = "all"
-  end
-
-  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
-  # such as FTP and Heroku are also available. See the documentation at
-  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
-  # config.push.define "atlas" do |push|
-  #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
-  # end
-
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline <<-SHELL
-#  config.vm.provision "shell", path: "postup.sh"
 end
+
