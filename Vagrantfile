@@ -11,8 +11,7 @@ Vagrant.configure(2) do |config|
     omarsingle.vm.network "private_network", ip: "192.168.33.55"
     omarsingle.vm.provision :salt do |salt|
       salt.minion_config = "omar-single.minion"
-      salt.run_highstate = false
-      #salt.run_highstate = true
+      salt.run_highstate = true
       salt.log_level = "all"
     end
   end
@@ -24,8 +23,7 @@ Vagrant.configure(2) do |config|
     elk.vm.network "private_network", ip: "192.168.33.56"
     elk.vm.provision :salt do |salt|
       salt.minion_config = "elk.minion"
-      salt.run_highstate = false
-      #salt.run_highstate = true
+      salt.run_highstate = true
       salt.log_level = "all"
     end
   end
@@ -52,8 +50,7 @@ Vagrant.configure(2) do |config|
     geowavesingle.vm.network "private_network", ip: "192.168.33.59"
     geowavesingle.vm.provision :salt do |salt|
       salt.minion_config = "geowave-single.minion"
-      salt.run_highstate = false
-      #salt.run_highstate = true
+      salt.run_highstate = true
       salt.log_level = "all"
     end
   end
