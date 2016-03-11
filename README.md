@@ -43,11 +43,14 @@ After installing both of these, you're ready to start!
 This Vagrant setup uses [Vagrant Multi-Machine](https://www.vagrantup.com/docs/multi-machine/)
 
 1. In this directory, use `$ vagrant up` to start the default omar-single node machine. 
+    - Settings and passwords are found in the `pillar/omaronesettings-dev.sls` pillar file.
 2. In this directory, use `$ vagrant up elk` to start the ELK machine.
 3. In this directory, use `$ vagrant up base` to start a clean CentOS 6 box for testing.
 4. In this directory, use `$ vagrant up ossim` and see the OSSIM-Only Notes.
 5. In this directory, use `$ vagrant up geowavesingle` for a single-machine geowave box. 
 6. In this directory, use `$ vagrant up pgsqlsingle` for a PostgreSQL machine suitable for testing.
+    - This applies the `postgresql.install` and `postgresql` states to install and configure
+      a Single PostgreSQL machine. The passwords are available in the `pillar/omaronesettings-dev.sls` pillar file. 
 
 
 This directory locally is shared with the vagrant machine at `/vagrant` and configured
