@@ -5,6 +5,7 @@
 ### Initialize the git submodules
 1. After cloning this repo, you'll need to update the submodules contained
 in `sm-rbtcloud-com`.  From the top-level:
+    - `$ git submodule sync`
     - `$ git submodule update --init --recursive`
 
 ### Preparation
