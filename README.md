@@ -85,10 +85,12 @@ this Vagrant configuration accessible through a web browser, or SSH
 
     192.168.33.55 omar-single.rbtcloud.dev
     192.168.33.56 elk.rbtcloud.dev
-    192.168.33.57 base.rbtcloud.dev
+    192.168.33.57 base6.rbtcloud.dev
     192.168.33.58 ossim-single.rbtcloud.dev
     192.168.33.59 geowave-single.rbtcloud.dev
     192.168.33.60 pgsql-single.rbtcloud.dev
+    192.168.33.61 base7.rbtcloud.dev
+    192.168.33.61 rhel7.rbtcloud.dev
 
 ### OSSIM Only Without Access to sm-rbtcloud
 The `sm-rbtcloud` repo contains proprietary company specific credentials and
@@ -102,3 +104,7 @@ and be up and running quickly:
 OSSIM.
 2. `$ vagrant up ossim` will install the dependencies you need as well as OSSIM itself.
 
+### The RedHat Box
+To do any software installation or yum activities, you'll need a free RedHat
+Developer license. You can get it from [developer.redhat.com](https://github.com/projectatomic/adb-vagrant-registration). After that, you can use the [vagrant-registration](https://github.com/projectatomic/adb-vagrant-registration) plugin to register and automatically de-register
+your vagrant box. 
